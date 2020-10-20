@@ -1,7 +1,3 @@
-# Array of tests to run (in order)
-# Each test contains
-#   description - 
-#   steps - A list of steps to perform, each step can have
 #       inputs - A list of tuples for the inputs to apply at that step
 #       *time - The time (in ms) to wait before continuing to the next step 
 #           and before checking expected values for this step. The time should be a multiple of
@@ -15,20 +11,19 @@
 # that they are not ran in isolation but in the order shown and the state of the device is not reset or 
 # altered in between executions (unless preconditions are used).
 tests = [ {'description': 'This test will run first.',
-    'steps': [ {'inputs': [('PINA',<val>)], 'iterations': 1 } ],
-    'expected': [('PORT',<val>)],
+    'steps': [ {'inputs': [('PINA',0x01), ('PINB',0x01)], 'iterations': 1 } ],
+    'expected': [('PORTC',0x02)],
     },
     {'description': 'This test will run second.',
-    'steps': [ {'inputs': [('PIN', <val>)],'iterations': 1}, # Set PIN to val then run one iteration
-        {'inputs': [('PIN',<val>)], 'time': 300 }, # Set PIN to val then run 300 ms
-        {'inputs': [('PIN',<val>)], 'iterations': 1, 'expected': [('PORT',<val>)]}, 
-        {'inputs': [('PIN',<val>)], 'time': 600}, ],
-    'expected': [('PORT',<val>)],
+    'steps': [
+        {'inputs': [('PINA', 0xFF), ('PINB',0xFF)],'iterations': 1}, ], # Set PIN to val then run one iteration
+    'expected': [('PORTC',0x10)],
     },
     ]
 
 # Optionally you can add a set of "watch" variables these need to be global or static and may need
 # to be scoped at the function level (for static variables) if there are naming conflicts. The 
 # variables listed here will display everytime you hit (and stop at) a breakpoint
-watch = ['<function>::<static-var>','PORTB']
+watch = ['main::tempA', 'main::tempB','main::counter','PORTC']
+
 
