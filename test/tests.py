@@ -11,19 +11,19 @@
 # that they are not ran in isolation but in the order shown and the state of the device is not reset or 
 # altered in between executions (unless preconditions are used).
 tests = [ {'description': 'This test will run first.',
-    'steps': [ {'inputs': [('PINA',0x34)], 'iterations': 1 } ],
-    'expected': [('PORTC',0xF0)],
+    'steps': [ {'inputs': [('PINA',0xF2)], 'iterations': 1 } ],
+    'expected': [('PORTC',0x20), ('PORTB', 0x0F)],
     },
     {'description': 'This test will run second.',
     'steps': [
-        {'inputs': [('PINA', 0x0F)],'iterations': 1}, ], # Set PIN to val then run one iteration
-    'expected': [('PORTC',0x3F)],
+        {'inputs': [('PINA', 0x88)],'iterations': 1}, ], # Set PIN to val then run one iteration
+    'expected': [('PORTC',0x80), ('PORTB',0x08)],
     },
     ]
 
 # Optionally you can add a set of "watch" variables these need to be global or static and may need
 # to be scoped at the function level (for static variables) if there are naming conflicts. The 
 # variables listed here will display everytime you hit (and stop at) a breakpoint
-watch = ['main::tempA', 'main::tempC','PORTC']
+watch = ['main::tempA','main::tempB','PORTB','PORTC']
 
 
