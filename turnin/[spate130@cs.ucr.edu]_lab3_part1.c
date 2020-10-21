@@ -27,14 +27,15 @@ int main(void) {
         tempA = PINA;
         tempB = PINB;
 
-        for(int i = 0; i < 7; ++i){
-                if(((tempA & (0x01 << i))!= 0)){
+	    counter = 0x00;
+        for(int i = 0; i < 8; ++i){
+                if(((tempA & (0x01 << i)) != 0)){
                         counter = counter + 1;
                 }
         }
 
-        for(int i = 0; i < 7; ++i){
-                if(((tempB & (0x01 << i))!= 0)){
+        for(int j = 0; j < 8; ++j){
+                if(((tempB & (0x01 << j)) != 0)){
                         counter = counter + 1;
                 }
         }
