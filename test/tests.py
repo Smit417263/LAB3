@@ -11,12 +11,12 @@
 # that they are not ran in isolation but in the order shown and the state of the device is not reset or 
 # altered in between executions (unless preconditions are used).
 tests = [ {'description': 'This test will run first.',
-    'steps': [ {'inputs': [('PINA',0x04)], 'iterations': 1 } ],
-    'expected': [('PORTC',0x70)],
+    'steps': [ {'inputs': [('PINA',0x34)], 'iterations': 1 } ],
+    'expected': [('PORTC',0xF0)],
     },
     {'description': 'This test will run second.',
     'steps': [
-        {'inputs': [('PINA', 0xFF)],'iterations': 1}, ], # Set PIN to val then run one iteration
+        {'inputs': [('PINA', 0x0F)],'iterations': 1}, ], # Set PIN to val then run one iteration
     'expected': [('PORTC',0x3F)],
     },
     ]
